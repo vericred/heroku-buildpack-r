@@ -128,5 +128,5 @@ mkdir -p $VENDOR_DIR/R
 cp -R /app/vendor/R/* $VENDOR_DIR/R
 
 
-cp -R $VENDOR_DIR/.apt $CACHE_DIR/.apt ; fi
-cp -R $VENDOR_DIR/R $CACHE_DIR/.apt ; fi
+cp -R $VENDOR_DIR/.apt $CACHE_DIR/.apt
+cp -R $VENDOR_DIR/R $CACHE_DIR/R
