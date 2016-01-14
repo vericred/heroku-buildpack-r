@@ -30,10 +30,13 @@ function read_var() {
 unset GIT_DIR
 
 # parse and derive params
-BUILD_DIR=$1
-CACHE_DIR="$2/vendor"
+BUILD_DIR="$1/analysis/app"
+CACHE_DIR=$2
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
 BUILDPACK_DIR="$(dirname $(dirname $0))"
+
+# change into our build dir
+cd $BUILD_DIR
 
 # fix STACK variable if unset
 if [ -z "${STACK}" ];
@@ -64,6 +67,10 @@ VENDOR_DIR="$BUILD_DIR/vendor"
 CRAN_MIRROR="http://cran.revolutionanalytics.com"
 
 mkdir -p $CACHE_DIR
+
+# restore from cache
+if [ -d $CACHE_DIR/.apt ] ; then cp -R $CACHE_DIR/.apt $VENDOR_DIR/.apt ; fi
+if [ -d $CACHE_DIR/R ] ; then cp -R $CACHE_DIR/R $VENDOR_DIR/R ; fi
 
 # vendor R into the slug
 echo "Vendoring R $R_VERSION for $STACK stack ($BUILD_PACK_VERSION)" | indent
@@ -119,3 +126,7 @@ echo "R $R_VERSION successfully installed" | indent
 rm -rf $VENDOR_DIR/R
 mkdir -p $VENDOR_DIR/R
 cp -R /app/vendor/R/* $VENDOR_DIR/R
+
+
+cp -R $VENDOR_DIR/.apt $CACHE_DIR/.apt ; fi
+cp -R $VENDOR_DIR/R $CACHE_DIR/.apt ; fi
