@@ -81,8 +81,14 @@ CRAN_MIRROR="http://cran.revolutionanalytics.com"
 
 # restore from cache
 echo "Restoring cache" | indent
-if [ -d $CACHE_DIR/.apt ] ; then cp -R $CACHE_DIR/.apt $VENDOR_DIR/.apt ; fi
-if [ -d $CACHE_DIR/R ] ; then cp -R $CACHE_DIR/R $VENDOR_DIR/R ; fi
+if [ -d $CACHE_DIR/.apt ] ; then
+  cp -R $CACHE_DIR/.apt $VENDOR_DIR/.apt
+  cp -R $CACHE_DIR/.apt /app/vendor/.apt
+fi
+if [ -d $CACHE_DIR/R ] ; then
+  cp -R $CACHE_DIR/R $VENDOR_DIR/R
+  cp -R $CACHE_DIR/R /app/vendor/R
+fi
 echo "Cache restored" | indent
 
 copy_dependencies
