@@ -124,6 +124,9 @@ echo "R $R_VERSION successfully installed" | indent
 
 copy_dependencies
 
+# remove vendor dir to decrease overall size of the slug
+rm -rf $VENDOR_DIR
+
 # create cache
 echo "Creating cache" | indent
 
